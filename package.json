@@ -1,0 +1,118 @@
+{
+  "name": "cursor-speech",
+  "displayName": "Cursor Speech",
+  "description": "Reads selected text aloud.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mem0cypher/CursorTTS.git"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cursor-speech.speakText",
+        "title": "Speak Text"
+      },
+      {
+        "command": "cursor-speech.stopSpeaking",
+        "title": "Stop Speaking"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "cursor-speech.speakText",
+          "group": "navigation"
+        },
+        {
+          "command": "cursor-speech.stopSpeaking",
+          "group": "navigation"
+        }
+      ],
+      "webview/context": [
+        {
+          "command": "cursor-speech.speakText",
+          "group": "navigation"
+        },
+        {
+          "command": "cursor-speech.stopSpeaking",
+          "group": "navigation"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "cursor-speech.speakText",
+          "group": "navigation",
+          "when": "view == workbench.panel.chat.view.chat"
+        },
+        {
+          "command": "cursor-speech.stopSpeaking",
+          "group": "navigation",
+          "when": "view == workbench.panel.chat.view.chat"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "cursor-speech.speakText",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s",
+        "when": "!terminalFocus"
+      },
+      {
+        "command": "cursor-speech.stopSpeaking",
+        "key": "ctrl+alt+x",
+        "mac": "cmd+alt+x",
+        "when": "!terminalFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Cursor Speech",
+      "properties": {
+        "cursor-speech.speed": {
+          "type": "number",
+          "default": 1.6,
+          "description": "The speaking speed. 1.0 is normal speed."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.83.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "say": "^0.16.0"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
