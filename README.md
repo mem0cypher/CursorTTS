@@ -1,4 +1,4 @@
-![Cursor Speech](logo.png)
+<img src="logo.png" alt="Cursor Speech" width="150">
 
 # Cursor Speech
 
